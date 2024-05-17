@@ -1,0 +1,514 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background: url('fotosdiversas/background.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+/* Tipo de letra dos títulos */
+.jumbotron h1 {
+    font-family: 'Kanit', sans-serif;
+}
+
+/* hr por baixo do titulo */
+hr.my-4 {
+    border: none;
+    height: 5px;
+    background-color: #57ca85;
+    margin: 20px 0;
+}
+
+/* css para classe flex-body */
+.flex-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* container branco do login */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+/* logo no container de login */
+.login-logo {
+    margin-right: 5px; /* Espaço entre a imagem e o formulário */   
+}
+
+.login-logo img {
+    width: 400px;
+    height: auto;
+}
+
+/* formulário no container do login */
+.login-form {
+    width: 250px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* inputs no formulário */
+.input-group input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: #ccc;
+    /* Altera o fundo para cinza */
+    border: 2px solid transparent;
+    /* Adiciona uma borda transparente */
+    border-radius: 25px;
+}
+
+/* borda verde quando o input estiver selecionado */
+.input-group input:focus {
+    border-color: #57ca85;
+    outline: none;
+    padding: 14px;
+}
+
+/* botão de login */
+.login-button {
+    background-color: #57ca85;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.login-button:hover {
+    background-color: #333;
+}
+
+/* links "Criar conta" e "Iniciar sessão" */
+.create-account,
+.text-center a {
+    display: block;
+    margin-top: 15px;
+    color: #6a63b6;
+    text-decoration: none;
+}
+
+.create-account:hover,
+.text-center a:hover {
+    color: #57ca85;
+}
+
+/* css para as labels */
+label {
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+    font-size: 14px;
+}
+
+/*NAVBAR */
+/*navbaradmin e cliente - pin*/
+.nav-item img {
+    max-width: 80px;
+    max-height: 80px;
+    margin-right: 10px;
+}
+
+/* itens da navbar */
+.nav-item {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    font-weight: bold;
+    color: #57ca85;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #98FB98;
+    background-color: #333;
+    text-decoration: none;
+}
+
+/* imagem do cliente */
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ícone de logout */
+.logout-icon {
+    color: #57ca85;
+    width: 24px;
+    height: 24px;
+}
+
+.nav-link {
+    color: #57ca85;
+}
+
+.nav-link:hover {
+    background-color: #333;
+}
+
+/* css GERAL para todos os cards menos os services */
+.card {
+    background-color: rgba(255, 255, 255, 0.7); /*transparência*/
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    font-size: 0.9rem;
+    padding: 15px;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.card-subtitle {
+    color: #666;
+}
+
+.card-link {
+    margin-right: 5px;
+}
+
+/* especie de hr a separar dentro dos cards */
+.card-body .separator {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+    display: block;
+}
+
+/* css para os ESTADOS das faturas */
+.estado {
+    border-radius: 20px;
+    min-width: 40px !important;
+    max-width: 100px !important;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0 10px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    /* espaço abaixo do indicador de estado para os botões de editar e eliminar */
+}
+
+.pago {
+    background-color: #17a2b8;
+}
+
+.aguarda-pagamento {
+    background-color: #ffc107;
+}
+
+.em-processamento {
+    background-color: #7C564E;
+}
+
+/*botões de bootstrap passam todos a ser como o do login */
+.btn-success,
+.btn-primary,
+.btn-danger,
+.btn-secondary {
+    background-color: #57ca85;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+/* escolhi que herdassem a cor original do bootstrap em hover */
+.btn-success:hover {
+    background-color: #333;
+}
+
+.btn-primary:hover {
+    background-color: #17a2b8;
+}
+
+.btn-danger:hover {
+    background-color: #ff0000;
+}
+
+/*area-admin e area-cliente para os serviços disponíveis*/
+.services-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.services-card .card-header h4 {
+    color: #4CAF50;
+}
+
+.services-card .card-body div.col {
+    padding: 10px;
+}
+
+.services-card .card-body div.col p {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/*css para a foto de perfil do cliente*/
+.img-thumbnail {
+    border-radius: 50%;
+    border: 4px solid #57ca85;
+    object-fit: cover;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 15px 30px rgba(0.6, 0.6, 0.6, 0.6);
+}
+
+/*css para o modal de editar os dados do cliente */
+
+/* fundo do modal */
+#editarDadosModal .modal-content {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* cor do texto das labels para preto */
+/* e para o titulo do modal */
+#editarDadosModal .form-label,
+#editarDadosModal .modal-title {
+    color: #000000;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+}
+
+/* inputs no formulário dentro do modal */
+#editarDadosModal .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+/* inputs - text + pass + file dentro do modal */
+#editarDadosModal input[type="text"],
+#editarDadosModal input[type="password"],
+#editarDadosModal input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: #ccc;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+/* borda verde quando o seleccionamos */
+#editarDadosModal input[type="text"]:focus,
+#editarDadosModal input[type="password"]:focus,
+#editarDadosModal input[type="file"]:focus {
+    border-color: #57ca85;
+    outline: none;
+    padding: 14px;
+}
+
+/* botão do modal */
+#editarDadosModal .btn-success {
+    background-color: #57ca85;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+#editarDadosModal .btn-success:hover {
+    background-color: #333;
+}
+
+/*dados pessoais alinhamento c a imagem */
+.profile-info {
+    margin-top: 90px;
+}
+
+/*css para o filtro */
+.filter-popup {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid #ccc;
+    z-index: 1000;
+    width: 100%;
+    padding: 15px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: #000;
+}
+
+.filter-popup .form-select,
+.filter-popup .form-control {
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: #ccc;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+/* borda verde quando o seleccionamos */
+.filter-popup .form-select:focus,
+.filter-popup .form-control:focus {
+    border-color: #57ca85 !important;
+    outline: none;
+    padding: 14px;
+}
+
+.filter-popup .btn-primary {
+    background-color: #57ca85;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    width: 20%;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.filter-popup .btn-center {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.filter-popup .btn-primary:hover {
+    background-color: #333;
+}
+
+/*caso não haja faturas - class error-box */
+.error-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: #000;
+    display: inline-block;
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.error-box p {
+    margin: 10px 0 0 0;
+    font-size: 1rem;
+    color: #000;
+}
+
+/*css para o umregistoxml e todosregistosjson */
+/*container de fatura */
+.fatura-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto;
+}
+
+/* logo no container de fatura */
+.fatura-logo {
+    margin-bottom: 20px;
+}
+
+.fatura-logo img {
+    width: 100px;
+    height: auto;
+}
+
+/* formulário no container de fatura */
+.fatura-form {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* inputs no formulário */
+.input-group input,
+.input-group select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: #ccc;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+/* borda verde selecionado */
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #57ca85;
+    outline: none;
+}
+
+/* botões no formulário */
+.fatura-button {
+    background-color: #57ca85;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    width: 97%;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.fatura-button:hover {
+    background-color: #333;
+}
+
+/* Estilos para a div #dados que vai receber os detalhes da fatura */
+#dados {
+    margin-top: 20px;
+    width: 100%;
+}

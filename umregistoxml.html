@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Fatura</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Carregar faturas existentes no dropdown
+            $.ajax({
+                type: "GET",
+                url: `http://ritansmartinis.getenjoyment.net/5421/Projeto/webservice.php/?acao=todasfaturasjson&user=admin&pass=admin`, // Ajuste com credenciais reais
+                dataType: "json",
+                success: function (response) {
+                    let faturas = response.Faturas;
+                    if (faturas && Array.isArray(faturas) && faturas.length > 0) {
+                        let optionsHtml = '<option value="">Selecione uma fatura</option>';
+                        faturas.forEach(fatura => {
+                            optionsHtml += `<option value="${fatura.id_fatura}">Fatura #${fatura.id_fatura} - ${fatura.nome_cliente}</option>`;
+                        });
+                        $("#id_fatura").html(optionsHtml);
+                    } else {
+                        $("#mensagem").show().text("Nenhuma fatura encontrada.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    let errorMsg = `Erro ao carregar as faturas: ${status} ${error}\nDetalhes do erro: ${xhr.responseText}`;
+                    console.error(errorMsg);
+                    $("#mensagem").show().text(errorMsg);
+                }
+            });
+
+            $("#botao").click(function () {
+                let user = $("#username").val();
+                let pass = $("#password").val();
+                let id_fatura = $("#id_fatura").val();
+
+                console.log(`Username: ${user}, Password: ${pass}, ID Fatura: ${id_fatura}`);
+
+                if (!user || !pass || !id_fatura) {
+                    $("#dados").hide();
+                    $("#mensagem").show().text("Todos os campos são obrigatórios.");
+                    return;
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: `http://ritansmartinis.getenjoyment.net/5421/Projeto/webservice.php?acao=umafaturaxml&user=${user}&pass=${pass}&id_fatura=${id_fatura}`,
+                    dataType: "xml",
+                    success: function (response) {
+                        console.log("Resposta recebida:", response);
+                        let fatura = $(response).find('Fatura');
+                        if (fatura.length > 0) {
+                            let detalhes = `
+                                    <div class="card m-2" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${fatura.find('nome_cliente').text()}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Fatura #${fatura.find('id_fatura').text()}</h6>
+                                        <p class="card-text">
+                                            <strong>Tipo: </strong>${fatura.find('tipo_fatura').text()}<br>
+                                            <strong>Valor: </strong>${fatura.find('valor').text()}<br>
+                                            <strong>Emissão: </strong>${fatura.find('data_emissao').text()}<br>
+                                            <strong>Estado: </strong><span class="estado ${fatura.find('estado').text().toLowerCase().replace(' ', '-')}">
+                                                ${fatura.find('estado').text()}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            `;
+                            $("#dados").html(detalhes).show();
+                            $("#mensagem").hide();
+                        } else {
+                            $("#mensagem").show().text("Nenhum registo encontrado.");
+                            $("#dados").hide();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        let errorMsg = "Acesso Negado! Credenciais inválidas.";
+                        console.error(errorMsg);
+                        $("#mensagem").show().text(errorMsg);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body class="flex-body">
+    <div class="fatura-container">
+        <div class="fatura-logo">
+            <img src="fotosdiversas/logo.png" alt="Logo da Empresa">
+        </div>
+        <div class="fatura-form">
+            <h3 class="text-center">Detalhes da Fatura</h3>
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <p></p>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <p></p>
+            <div class="input-group">
+                <select id="id_fatura" name="id_fatura" required>
+                    <option value="">Carregando faturas...</option>
+                </select>
+            </div>
+            <p></p>
+            <input type="button" id="botao" value="Ver Fatura" class="fatura-button">
+            <div id="mensagem" style="color: red;"></div>
+            <div id="dados"></div>
+        </div>
+    </div>
+</body>
+
+</html>

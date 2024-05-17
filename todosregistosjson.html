@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todos os Registos JSON</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dados").hide();
+            $("#mensagem").hide();
+
+            $("#botao").click(function () {
+                let user = $("#username").val();
+                let pass = $("#password").val();
+
+                console.log(`Username: ${user}, Password: ${pass}`);
+
+                if (!user || !pass) {
+                    $("#dados").hide();
+                    $("#mensagem").show().text("Para ver o conteúdo tem de iniciar sessão.");
+                    return;
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: `http://ritansmartinis.getenjoyment.net/5421/Projeto/webservice.php/?acao=todasfaturasjson&user=${user}&pass=${pass}`,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log("Resposta recebida:", response);
+                        let faturas = response.Faturas;
+                        if (faturas && Array.isArray(faturas) && faturas.length > 0) {
+                            let dadosHtml = '<h2>Todos os Registos</h2>';
+                            dadosHtml += '<div class="d-flex flex-wrap">';
+                            faturas.forEach(fatura => {
+                                dadosHtml += `
+                                    <div class="card m-2" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${fatura.nome_cliente}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">Fatura #${fatura.id_fatura}</h6>
+                                            <p class="card-text">
+                                                Tipo: ${fatura.tipo_fatura}<br>
+                                                Valor: ${fatura.valor}<br>
+                                                Emissão: ${fatura.data_emissao}<br>
+                                                <span class="estado ${fatura.estado.toLowerCase().replace(' ', '-')}">
+                                                    ${fatura.estado}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            dadosHtml += '</div>';
+
+                            $("#dados").html(dadosHtml).show();
+                            $("#mensagem").hide();
+                        } else {
+                            $("#mensagem").show().text("Nenhum registo encontrado.");
+                            $("#dados").hide();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        let errorMsg = "Acesso Negado! Credenciais inválidas.";
+                        if (xhr.responseText.includes("ACESSO NEGADO")) {
+                            console.error(errorMsg);
+                            $("#mensagem").show().text(errorMsg);
+                        }
+                        $("#dados").hide();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body class="flex-body">
+    <div class="fatura-container">
+        <div class="fatura-logo">
+            <img src="fotosdiversas/logo.png" alt="Logo da Empresa">
+        </div>
+        <div class="fatura-form">
+            <h3 class="text-center">Insira os detalhes para obter todos os registos</h3>
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <p></p>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <p></p>
+            <input type="button" id="botao" value="Ver Registos" class="fatura-button">
+            <div id="mensagem" style="color: red;"></div>
+            <div id="dados"></div>
+        </div>
+    </div>
+</body>
+
+</html>
